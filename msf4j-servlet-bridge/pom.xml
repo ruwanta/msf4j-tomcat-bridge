@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2018, WSO2 Inc. (http://wso2.com) All Rights Reserved.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.wso2.carbon.identity.msf4j</groupId>
+        <artifactId>tomcat-msf4j</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <groupId>org.wso2.carbon.identity.msf4j</groupId>
+    <artifactId>msf4j-servlet</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <developers>
+        <developer>
+            <name>WSO2</name>
+            <email>architecture@wso2.org</email>
+            <organization>WSO2 Inc</organization>
+            <organizationUrl>https://github.com/wso2/msf4j</organizationUrl>
+        </developer>
+    </developers>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.wso2.msf4j</groupId>
+            <artifactId>msf4j-all</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.carbon</groupId>
+            <artifactId>org.wso2.carbon.logging</artifactId>
+            <version>${carbon.kernel.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+    </build>
+
+    <properties>
+        <maven.checkstyleplugin.version>2.16</maven.checkstyleplugin.version>
+        <maven.findbugsplugin.version>3.0.2</maven.findbugsplugin.version>
+        <carbon.kernel.version>4.4.19</carbon.kernel.version>
+    </properties>
+</project>

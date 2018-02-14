@@ -7,11 +7,11 @@ Add the following to the web.xml
 ```XML
     <servlet>
         <servlet-name>msf4j</servlet-name>
-        <servlet-class>com.wso2.carbon.identity.msf4j.tomcat.Msf4jBridgeServlet</servlet-class>
+        <servlet-class>Msf4jBridgeServlet</servlet-class>
         <init-param>
             <param-name>ServiceClasses</param-name>
             <!-- Comma sepereted service classes -->
-            <param-value>com.wso2.carbon.identity.msf4j.tomcat.HelloService</param-value>
+            <param-value>HelloService</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>
@@ -19,3 +19,5 @@ Add the following to the web.xml
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
 ```
+First build the bridge ,
+then build the  sample.
