@@ -6,109 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="340067b8-db76-4e15-8724-be1173c4ddc8" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/msf4j-servlet-bridge/target/classes/com/wso2/carbon/identity/msf4j/bridge/servlet/Msf4jBridgeServlet$1.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/msf4j-servlet-bridge/target/classes/com/wso2/carbon/identity/msf4j/bridge/servlet/Msf4jBridgeServlet$TomcatBridgeListener.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/msf4j-servlet-bridge/target/classes/com/wso2/carbon/identity/msf4j/bridge/servlet/Msf4jBridgeServlet.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/msf4j-servlet-bridge/target/classes/com/wso2/carbon/identity/msf4j/bridge/servlet/ServletWrappedHttpContent.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/msf4j-servlet-bridge/target/classes/com/wso2/carbon/identity/msf4j/bridge/servlet/TomcatCarbonMessage.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/msf4j-servlet-bridge/target/msf4j-servlet-1.0-SNAPSHOT.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/msf4j-servlet-bridge/target/test-classes/com/wso2/carbon/identity/msf4j/bridge/sample/EmbeddedTomcatServer.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sample/target/classes/com/wso2/carbon/identity/msf4j/bridge/sample/HelloService.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sample/target/classes/com/wso2/carbon/identity/msf4j/bridge/sample/User.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sample/target/sample.war" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sample/target/sample/WEB-INF/classes/com/wso2/carbon/identity/msf4j/bridge/sample/HelloService.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sample/target/sample/WEB-INF/classes/com/wso2/carbon/identity/msf4j/bridge/sample/User.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sample/target/sample/WEB-INF/lib/commons-logging-1.2.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sample/target/sample/WEB-INF/lib/javax.servlet-api-3.1.0.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sample/target/sample/WEB-INF/lib/log4j-1.2.17.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sample/target/sample/WEB-INF/lib/log4j-1.2.17.wso2v1.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sample/target/sample/WEB-INF/lib/msf4j-all-2.5.3-20180211.144503-8.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sample/target/sample/WEB-INF/lib/msf4j-servlet-1.0-SNAPSHOT.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sample/target/sample/WEB-INF/lib/org.eclipse.osgi-3.9.1.v20130814-1242.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sample/target/sample/WEB-INF/lib/org.wso2.carbon.bootstrap-4.4.19.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sample/target/sample/WEB-INF/lib/org.wso2.carbon.logging-4.4.19.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sample/target/sample/WEB-INF/lib/wrapper-3.2.3.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/.name" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/artifacts/msf4j_servlet_bridge_sample_war.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/artifacts/msf4j_servlet_bridge_sample_war_exploded.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_logging_commons_logging_1_2.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_servlet_javax_servlet_api_3_1_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__log4j_log4j_1_2_17.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_log4j_wso2_log4j_1_2_17_wso2v1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_core_8_5_24.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_tomcat_annotations_api_8_5_24.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_osgi_org_eclipse_osgi_3_9_1_v20130814_1242.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_wso2_carbon_org_wso2_carbon_bootstrap_4_4_19.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_wso2_carbon_org_wso2_carbon_logging_4_4_19.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_wso2_msf4j_msf4j_all_2_5_3_SNAPSHOT.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__wrapper_wrapper_3_2_3.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/msf4j-servlet-bridge/.idea/.name" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/msf4j-servlet-bridge/.idea/compiler.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/msf4j-servlet-bridge/.idea/libraries/Maven__javax_servlet_javax_servlet_api_3_1_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/msf4j-servlet-bridge/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_core_8_5_24.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/msf4j-servlet-bridge/.idea/libraries/Maven__org_apache_tomcat_tomcat_annotations_api_8_5_24.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/msf4j-servlet-bridge/.idea/libraries/Maven__org_wso2_msf4j_msf4j_all_2_5_3_SNAPSHOT.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/msf4j-servlet-bridge/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/msf4j-servlet-bridge/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/msf4j-servlet-bridge/.idea/workspace.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/msf4j-servlet-bridge/msf4j-servlet-bridge.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/msf4j-servlet-bridge/target/.plxarc" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/msf4j-servlet-bridge/target/maven-archiver/pom.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/msf4j-servlet-bridge/target/maven-shared-archive-resources/META-INF/DEPENDENCIES" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/msf4j-servlet-bridge/target/maven-shared-archive-resources/META-INF/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/msf4j-servlet-bridge/target/maven-shared-archive-resources/META-INF/NOTICE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/msf4j-servlet-bridge/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/msf4j-servlet-bridge/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/msf4j-servlet-bridge/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/msf4j-servlet-bridge/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sample/.idea/artifacts/mywebtest_war.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sample/.idea/artifacts/mywebtest_war_exploded.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sample/.idea/compiler.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sample/.idea/libraries/Maven__javax_servlet_javax_servlet_api_3_1_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sample/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_core_8_5_24.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sample/.idea/libraries/Maven__org_apache_tomcat_tomcat_annotations_api_8_5_24.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sample/.idea/libraries/Maven__org_wso2_msf4j_msf4j_all_2_5_3_SNAPSHOT.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sample/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sample/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sample/.idea/workspace.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sample/mywebtest.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sample/pom.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sample/sample.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sample/src/main/webapp/WEB-INF/web.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sample/src/main/webapp/index.jsp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sample/target/.plxarc" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sample/target/maven-archiver/pom.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sample/target/maven-shared-archive-resources/META-INF/DEPENDENCIES" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sample/target/maven-shared-archive-resources/META-INF/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sample/target/maven-shared-archive-resources/META-INF/NOTICE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sample/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sample/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sample/target/sample/WEB-INF/classes/META-INF/DEPENDENCIES" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sample/target/sample/WEB-INF/classes/META-INF/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sample/target/sample/WEB-INF/classes/META-INF/NOTICE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sample/target/sample/WEB-INF/web.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sample/target/sample/index.jsp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/.plxarc" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/maven-shared-archive-resources/META-INF/DEPENDENCIES" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/maven-shared-archive-resources/META-INF/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/maven-shared-archive-resources/META-INF/NOTICE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tomcat-msf4j.iml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/servlet/pom.xml" afterPath="$PROJECT_DIR$/msf4j-servlet-bridge/pom.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/servlet/src/main/java/com/wso2/carbon/identity/msf4j/tomcat/HelloService.java" afterPath="$PROJECT_DIR$/sample/src/main/java/com/wso2/carbon/identity/msf4j/bridge/sample/HelloService.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/servlet/src/main/java/com/wso2/carbon/identity/msf4j/tomcat/Msf4jBridgeServlet.java" afterPath="$PROJECT_DIR$/msf4j-servlet-bridge/src/main/java/com/wso2/carbon/identity/msf4j/bridge/servlet/Msf4jBridgeServlet.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/servlet/src/main/java/com/wso2/carbon/identity/msf4j/tomcat/ServletWrappedHttpContent.java" afterPath="$PROJECT_DIR$/msf4j-servlet-bridge/src/main/java/com/wso2/carbon/identity/msf4j/bridge/servlet/ServletWrappedHttpContent.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/servlet/src/main/java/com/wso2/carbon/identity/msf4j/tomcat/TomcatCarbonMessage.java" afterPath="$PROJECT_DIR$/msf4j-servlet-bridge/src/main/java/com/wso2/carbon/identity/msf4j/bridge/servlet/TomcatCarbonMessage.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/servlet/src/main/java/com/wso2/carbon/identity/msf4j/tomcat/User.java" afterPath="$PROJECT_DIR$/sample/src/main/java/com/wso2/carbon/identity/msf4j/bridge/sample/User.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/servlet/src/test/java/com/wso2/carbon/identity/msf4j/tomcat/EmbeddedTomcatServer.java" afterPath="$PROJECT_DIR$/msf4j-servlet-bridge/src/test/java/com/wso2/carbon/identity/msf4j/bridge/sample/EmbeddedTomcatServer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-    </list>
+    <list default="true" id="340067b8-db76-4e15-8724-be1173c4ddc8" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/servlet/target/" />
     <ignored path="$PROJECT_DIR$/sample/target/" />
@@ -185,7 +83,7 @@
     <option name="FILTER_DEBUG" value="true" />
     <option name="CUSTOM_FILTER" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="125" />
     <option name="y" value="93" />
     <option name="width" value="1431" />
@@ -542,15 +440,15 @@
       <updated>1518601615909</updated>
       <workItem from="1518601622773" duration="8175000" />
       <workItem from="1518614146649" duration="362000" />
-      <workItem from="1518621320862" duration="753000" />
+      <workItem from="1518621320862" duration="1188000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9290000" />
+    <option name="totallyTimeSpent" value="9725000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="24" width="1535" height="876" extended-state="6" />
+    <frame x="65" y="24" width="1535" height="876" extended-state="7" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
