@@ -1,0 +1,30 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="msf4j-servlet-bridge-sample:war exploded">
+    <output-path>$PROJECT_DIR$/sample/target/sample</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="sample" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="file-copy" path="$MAVEN_REPOSITORY$/org/wso2/msf4j/msf4j-all/2.5.3-SNAPSHOT/msf4j-all-2.5.3-20180211.144503-8.jar" output-file-name="msf4j-all-2.5.3-SNAPSHOT.jar" />
+          <element id="library" level="project" name="Maven: javax.servlet:javax.servlet-api:3.1.0" />
+          <element id="archive" name="msf4j-servlet-1.0-SNAPSHOT.jar">
+            <element id="module-output" name="msf4j-servlet-bridge" />
+          </element>
+          <element id="library" level="project" name="Maven: org.wso2.carbon:org.wso2.carbon.logging:4.4.19" />
+          <element id="library" level="project" name="Maven: org.apache.log4j.wso2:log4j:1.2.17.wso2v1" />
+          <element id="library" level="project" name="Maven: log4j:log4j:1.2.17" />
+          <element id="library" level="project" name="Maven: commons-logging:commons-logging:1.2" />
+          <element id="library" level="project" name="Maven: org.wso2.carbon:org.wso2.carbon.bootstrap:4.4.19" />
+          <element id="library" level="project" name="Maven: wrapper:wrapper:3.2.3" />
+          <element id="library" level="project" name="Maven: org.eclipse.osgi:org.eclipse.osgi:3.9.1.v20130814-1242" />
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/sample/target/sample/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="sample/web/Web" />
+    </root>
+  </artifact>
+</component>
