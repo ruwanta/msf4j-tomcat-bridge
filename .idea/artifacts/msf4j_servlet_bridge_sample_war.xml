@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="msf4j-servlet-bridge-sample:war">
-    <output-path>$PROJECT_DIR$/sample/target</output-path>
-    <root id="archive" name="sample.war">
-      <element id="artifact" artifact-name="msf4j-servlet-bridge-sample:war exploded" />
-    </root>
-  </artifact>
-</component>
