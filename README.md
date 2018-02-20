@@ -19,5 +19,4 @@ Add the following to the web.xml
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
 ```
-First build the bridge ,
-then build the  sample.
+Build the root pom and then drop the .war found inside sample in Identity Server webapps directory.

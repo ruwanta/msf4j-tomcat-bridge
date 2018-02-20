@@ -21,14 +21,14 @@
     <parent>
         <groupId>org.wso2</groupId>
         <artifactId>wso2</artifactId>
-        <version>2</version>
+        <version>1</version>
         <relativePath/>
     </parent>
 
     <groupId>org.wso2.carbon.identity.msf4j</groupId>
     <artifactId>tomcat-msf4j</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.1</version>
 
     <developers>
         <developer>
@@ -42,6 +42,23 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>org.apache.felix.scr.ds-annotations</artifactId>
+                <version>1.2.4</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>org.osgi.core</artifactId>
+                <version>1.4.0</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.msf4j</groupId>
+                <artifactId>msf4j-service</artifactId>
+                <version>2.5.2</version>
+                <type>pom</type>
+            </dependency>
+            <dependency>
                 <groupId>org.wso2.msf4j</groupId>
                 <artifactId>msf4j-all</artifactId>
                 <version>${msf4j.version}</version>
@@ -49,6 +66,7 @@
             <dependency>
                 <groupId>javax.servlet</groupId>
                 <artifactId>javax.servlet-api</artifactId>
+                <scope>provided</scope>
                 <version>${javax.servlet.api.version}</version>
             </dependency>
             <dependency>
@@ -62,55 +80,69 @@
                 <artifactId>msf4j-servlet</artifactId>
                 <version>${msf4j-servlet.bridge.version}</version>
             </dependency>
+            <dependency>
+                <groupId>commons-logging</groupId>
+                <artifactId>commons-logging</artifactId>
+                <version>1.1.3</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
     <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
-            </plugin>
-            <!--<plugin>-->
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                    </configuration>
+                </plugin>
+                <!--<plugin>-->
                 <!--<groupId>org.apache.maven.plugins</groupId>-->
                 <!--<artifactId>maven-checkstyle-plugin</artifactId>-->
                 <!--<version>${maven.checkstyleplugin.version}</version>-->
-            <!--</plugin>-->
-            <!--<plugin>-->
+                <!--</plugin>-->
+                <!--<plugin>-->
                 <!--<groupId>org.codehaus.mojo</groupId>-->
                 <!--<artifactId>findbugs-maven-plugin</artifactId>-->
                 <!--<version>${maven.findbugsplugin.version}</version>-->
-            <!--</plugin>-->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
-                <configuration>
-                    <preparationGoals>clean install</preparationGoals>
-                    <autoVersionSubmodules>true</autoVersionSubmodules>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-deploy-plugin</artifactId>
-            </plugin>
-            <!--<plugin>-->
+                <!--</plugin>-->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <configuration>
+                        <preparationGoals>clean install</preparationGoals>
+                        <autoVersionSubmodules>true</autoVersionSubmodules>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                </plugin>
+                <!--<plugin>-->
                 <!--<groupId>org.apache.maven.plugins</groupId>-->
                 <!--<artifactId>maven-javadoc-plugin</artifactId>-->
                 <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<id>docs</id>-->
-                        <!--<phase>compile</phase>-->
-                        <!--<goals>-->
-                            <!--<goal>javadoc</goal>-->
-                        <!--</goals>-->
-                    <!--</execution>-->
+                <!--<execution>-->
+                <!--<id>docs</id>-->
+                <!--<phase>compile</phase>-->
+                <!--<goals>-->
+                <!--<goal>javadoc</goal>-->
+                <!--</goals>-->
+                <!--</execution>-->
                 <!--</executions>-->
-            <!--</plugin>-->
-        </plugins>
+                <!--</plugin>-->
+
+                <plugin>
+                    <groupId>org.apache.felix</groupId>
+                    <artifactId>maven-bundle-plugin</artifactId>
+                    <version>2.4.0</version>
+                    <extensions>true</extensions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 
     <modules>
@@ -119,11 +151,15 @@
     </modules>
 
     <properties>
-        <msf4j.version>2.5.3-SNAPSHOT</msf4j.version>
+        <msf4j.version>2.5.2</msf4j.version>
         <javax.servlet.api.version>3.1.0</javax.servlet.api.version>
         <tomcat.embed.core.version>8.5.24</tomcat.embed.core.version>
         <maven.checkstyleplugin.version>2.16</maven.checkstyleplugin.version>
         <maven.findbugsplugin.version>3.0.2</maven.findbugsplugin.version>
-        <msf4j-servlet.bridge.version>1.0-SNAPSHOT</msf4j-servlet.bridge.version>
+
+        <carbon.kernel.version>4.4.19</carbon.kernel.version>
+
+        <osgi.framework.imp.pkg.version.range>[1.4.0, 2.0.0)</osgi.framework.imp.pkg.version.range>
+        <osgi.service.component.imp.pkg.version.range>[1.2.0, 2.0.0)</osgi.service.component.imp.pkg.version.range>
     </properties>
 </project>

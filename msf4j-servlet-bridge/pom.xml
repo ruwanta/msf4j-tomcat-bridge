@@ -20,27 +20,37 @@
     <parent>
         <groupId>org.wso2.carbon.identity.msf4j</groupId>
         <artifactId>tomcat-msf4j</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0.1</version>
     </parent>
 
-    <groupId>org.wso2.carbon.identity.msf4j</groupId>
     <artifactId>msf4j-servlet</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
-
-    <developers>
-        <developer>
-            <name>WSO2</name>
-            <email>architecture@wso2.org</email>
-            <organization>WSO2 Inc</organization>
-            <organizationUrl>https://github.com/wso2/msf4j</organizationUrl>
-        </developer>
-    </developers>
+    <packaging>bundle</packaging>
+    <url>http://wso2.org</url>
 
     <dependencies>
+        <!-- OSGI -->
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.scr.ds-annotations</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.osgi.core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.msf4j</groupId>
+            <artifactId>msf4j-service</artifactId>
+            <version>2.5.2</version>
+            <type>pom</type>
+        </dependency>
         <dependency>
             <groupId>org.wso2.msf4j</groupId>
             <artifactId>msf4j-all</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.msf4j</groupId>
+            <artifactId>msf4j-swagger</artifactId>
+            <version>2.5.2</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -51,18 +61,43 @@
             <artifactId>tomcat-embed-core</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.wso2.carbon</groupId>
-            <artifactId>org.wso2.carbon.logging</artifactId>
-            <version>${carbon.kernel.version}</version>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
         </dependency>
     </dependencies>
 
     <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <configuration>
+                    <instructions>
+                        <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+                        <Bundle-Name>${project.artifactId}</Bundle-Name>
+                        <Private-Package>com.wso2.carbon.identity.msf4j.bridge.servlet.internal</Private-Package>
+                        <Import-Package>
+                            org.osgi.framework.*; version="${osgi.framework.imp.pkg.version.range}",
+                            org.osgi.service.component.*; version="${osgi.service.component.imp.pkg.version.range}",
+                            org.apache.commons.logging.*,
+                            javax.servlet.http.*; version=${javax.servlet.api.version},
+                            <!--org.wso2.msf4j.internal.*; version=${msf4j.version},-->
+                            <!--io.netty.handler.*; version=2.5.2-->
+                        </Import-Package>
+                        <Export-Package>
+                            !com.wso2.carbon.identity.msf4j.bridge.servlet.internal,
+                            com.wso2.carbon.identity.msf4j.bridge.servlet.*;version="1.0.1"
+                        </Export-Package>
+                        <!--below line embeds all dependent jars until errors are resolved -->
+                        <Embed-Dependency>*</Embed-Dependency>
+                        <Embed-Transitive>true</Embed-Transitive>
+                    </instructions>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
-
-    <properties>
-        <maven.checkstyleplugin.version>2.16</maven.checkstyleplugin.version>
-        <maven.findbugsplugin.version>3.0.2</maven.findbugsplugin.version>
-        <carbon.kernel.version>4.4.19</carbon.kernel.version>
-    </properties>
 </project>
