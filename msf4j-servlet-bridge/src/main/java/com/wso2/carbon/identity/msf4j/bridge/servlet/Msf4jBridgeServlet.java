@@ -8,6 +8,7 @@ import io.swagger.util.ReflectionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.wso2.carbon.messaging.Constants;
+import org.wso2.msf4j.Microservice;
 import org.wso2.msf4j.internal.DataHolder;
 import org.wso2.msf4j.internal.MSF4JConstants;
 import org.wso2.msf4j.internal.MSF4JHttpConnectorListener;
@@ -42,6 +43,7 @@ public class Msf4jBridgeServlet extends HttpServlet {
 
     @Override
     public void init(ServletConfig servletConfig) throws ServletException {
+
         String serviceClasses = servletConfig.getInitParameter(SERVICES_LIST);
         if (serviceClasses == null) {
             //No services present. TODO: Log errors.
@@ -61,6 +63,11 @@ public class Msf4jBridgeServlet extends HttpServlet {
             }
 
         }
+        this.init();
+    }
+
+    public void init() throws ServletException {
+
         msRegistry.getSessionManager().init();
         msRegistry.initServices();
         DataHolder.getInstance().getMicroservicesRegistries().put("tomcat", msRegistry);
@@ -72,12 +79,14 @@ public class Msf4jBridgeServlet extends HttpServlet {
 
     @Override
     public ServletConfig getServletConfig() {
+
         return null;
     }
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         AsyncContext asyncContext = request.startAsync(request, response);
         HTTPCarbonMessage httpCarbonMessage = translateMessage(request, response);
 
@@ -85,6 +94,7 @@ public class Msf4jBridgeServlet extends HttpServlet {
     }
 
     private HTTPCarbonMessage translateMessage(HttpServletRequest servletRequest, HttpServletResponse servletResponse) {
+
         HttpMessage httpMessage = new DefaultHttpRequest(HttpVersion.HTTP_1_1,
                 new HttpMethod(servletRequest.getMethod()), servletRequest.getRequestURI());
         HTTPCarbonMessage carbonMessage = new TomcatCarbonMessage(httpMessage, servletRequest);
@@ -99,6 +109,7 @@ public class Msf4jBridgeServlet extends HttpServlet {
     }
 
     private void copyHeaders(HTTPCarbonMessage carbonMessage, HttpServletRequest servletRequest) {
+
         Enumeration<String> headerNames = servletRequest.getHeaderNames();
         while (headerNames.hasMoreElements()) {
             String name = headerNames.nextElement();
@@ -108,6 +119,7 @@ public class Msf4jBridgeServlet extends HttpServlet {
 
     @Override
     public String getServletInfo() {
+
         return null;
     }
 
@@ -117,9 +129,20 @@ public class Msf4jBridgeServlet extends HttpServlet {
     }
 
     void addToWaitingList(HTTPCarbonMessage httpCarbonMessage, AsyncContext asyncContext) {
+
         httpCarbonMessage.setProperty(MSF4JConstants.CHANNEL_ID, "tomcat");
         httpCarbonMessage.setProperty(HTTP_ASYNC_CONTEXT, asyncContext);
         msf4JHttpConnectorListener.onMessage(httpCarbonMessage);
+    }
+
+    /**
+     * Adds the micro-service to the Servlet.
+     *
+     * @param service
+     */
+    public void addMicroserviceToRegistry(Microservice service) {
+
+        msRegistry.addService(service);
     }
 
     private class TomcatBridgeListener implements HttpConnectorListener {
@@ -128,6 +151,7 @@ public class Msf4jBridgeServlet extends HttpServlet {
 
         @Override
         public void onMessage(HTTPCarbonMessage httpCarbonMessage) {
+
             AsyncContext asyncContex = (AsyncContext) httpCarbonMessage.getProperty(HTTP_ASYNC_CONTEXT);
             if (asyncContex != null) {
                 try {

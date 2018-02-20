@@ -14,13 +14,15 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
         <groupId>org.wso2.carbon.identity.msf4j</groupId>
         <artifactId>tomcat-msf4j</artifactId>
-        <version>1.0.1</version>
+        <version>1.0.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>msf4j-servlet</artifactId>
@@ -32,10 +34,12 @@
         <dependency>
             <groupId>org.apache.felix</groupId>
             <artifactId>org.apache.felix.scr.ds-annotations</artifactId>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.felix</groupId>
             <artifactId>org.osgi.core</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.wso2.msf4j</groupId>
@@ -55,14 +59,17 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-core</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
@@ -74,6 +81,10 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.felix</groupId>
+                <artifactId>maven-scr-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
                 <configuration>
                     <instructions>
@@ -81,20 +92,24 @@
                         <Bundle-Name>${project.artifactId}</Bundle-Name>
                         <Private-Package>com.wso2.carbon.identity.msf4j.bridge.servlet.internal</Private-Package>
                         <Import-Package>
-                            org.osgi.framework.*; version="${osgi.framework.imp.pkg.version.range}",
-                            org.osgi.service.component.*; version="${osgi.service.component.imp.pkg.version.range}",
+                            org.osgi.framework; version="${osgi.framework.imp.pkg.version.range}",
+                            org.osgi.service.component; version="${osgi.service.component.imp.pkg.version.range}",
+                            org.osgi.service.http; version="${osgi.service.http.imp.pkg.version.range}",
                             org.apache.commons.logging.*,
-                            javax.servlet.http.*; version=${javax.servlet.api.version},
+                            javax.servlet; version="${imp.pkg.version.javax.servlet}",
+                            javax.servlet.http; version="${imp.pkg.version.javax.servlet}"
                             <!--org.wso2.msf4j.internal.*; version=${msf4j.version},-->
                             <!--io.netty.handler.*; version=2.5.2-->
                         </Import-Package>
                         <Export-Package>
                             !com.wso2.carbon.identity.msf4j.bridge.servlet.internal,
-                            com.wso2.carbon.identity.msf4j.bridge.servlet.*;version="1.0.1"
+                            com.wso2.carbon.identity.msf4j.bridge.servlet.*;version="1.0.1",
+                            org.wso2.msf4j
                         </Export-Package>
                         <!--below line embeds all dependent jars until errors are resolved -->
-                        <Embed-Dependency>*</Embed-Dependency>
-                        <Embed-Transitive>true</Embed-Transitive>
+                        <Embed-Dependency>*;scope=!provided|!compile;artifactId=!javax.servlet-api|tomcat-embed-core
+                        </Embed-Dependency>
+                        <Embed-Transitive>false</Embed-Transitive>
                     </instructions>
                 </configuration>
             </plugin>
