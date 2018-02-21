@@ -11,7 +11,7 @@ Add the following to the web.xml
         <init-param>
             <param-name>ServiceClasses</param-name>
             <!-- Comma sepereted service classes -->
-            <param-value>HelloService</param-value>
+            <param-value>com.wso2.carbon.identity.msf4j.bridge.hello.world.HelloService</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>

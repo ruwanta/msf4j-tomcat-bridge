@@ -23,13 +23,15 @@ import java.util.Enumeration;
 import javax.servlet.AsyncContext;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * This is Msf4jBridgeServlet
+ * This is the Servlet used for bridging.
  */
+@WebServlet(urlPatterns = {"/*"},asyncSupported = true)
 public class Msf4jBridgeServlet extends HttpServlet {
 
     private Log log = LogFactory.getLog(Msf4jBridgeServlet.class);
@@ -43,7 +45,6 @@ public class Msf4jBridgeServlet extends HttpServlet {
 
     @Override
     public void init(ServletConfig servletConfig) throws ServletException {
-
         String serviceClasses = servletConfig.getInitParameter(SERVICES_LIST);
         if (serviceClasses == null) {
             //No services present. TODO: Log errors.
@@ -140,9 +141,19 @@ public class Msf4jBridgeServlet extends HttpServlet {
      *
      * @param service
      */
-    public void addMicroserviceToRegistry(Microservice service) {
+    public void addMicroServiceToRegistry(Microservice service) {
 
         msRegistry.addService(service);
+    }
+
+    /**
+     * Removes the micro-service from the Servlet.
+     *
+     * @param service
+     */
+    public void removeMicroServiceFromRegistry(Microservice service){
+
+        msRegistry.removeService(service);
     }
 
     private class TomcatBridgeListener implements HttpConnectorListener {

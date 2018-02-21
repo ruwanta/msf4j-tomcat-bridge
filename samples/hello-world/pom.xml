@@ -34,6 +34,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.wso2.eclipse.osgi</groupId>
+            <artifactId>org.eclipse.osgi</artifactId>
+            <version>3.10.2.v20150203-1939</version>
+        </dependency>
+        <dependency>
             <groupId>org.apache.felix</groupId>
             <artifactId>org.apache.felix.scr.ds-annotations</artifactId>
             <scope>compile</scope>
@@ -42,6 +47,11 @@
             <groupId>org.apache.felix</groupId>
             <artifactId>org.osgi.core</artifactId>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>javax.ws.rs-api</artifactId>
+            <version>2.0</version>
         </dependency>
         <dependency>
             <groupId>org.wso2.msf4j</groupId>
@@ -84,11 +94,12 @@
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Bundle-Name>${project.artifactId}</Bundle-Name>
                         <Import-Package>
-                            org.osgi.framework,
+                            org.osgi.framework;version="${osgi.framework.imp.pkg.version.range}",
                             org.osgi.service.component;version="${osgi.service.component.imp.pkg.version.range}",
-                            javax.ws.rs.*,
+                            <!--javax.ws.rs;version="${javax.version.range}",-->
                             org.wso2.msf4j
                         </Import-Package>
+                        <Embed-Dependency>javax.ws.rs-api</Embed-Dependency>
                         <Carbon-Component>${carbon.component}</Carbon-Component>
                     </instructions>
                 </configuration>

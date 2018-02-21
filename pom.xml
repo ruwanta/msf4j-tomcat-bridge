@@ -176,6 +176,7 @@
 
         <osgi.framework.imp.pkg.version.range>[1.4.0, 2.0.0)</osgi.framework.imp.pkg.version.range>
         <osgi.service.component.imp.pkg.version.range>[1.2.0, 2.0.0)</osgi.service.component.imp.pkg.version.range>
+        <javax.version.range>[1.1.0, 2.2.0)</javax.version.range>
         <osgi.service.http.imp.pkg.version.range>[1.2.1, 2.0.0)</osgi.service.http.imp.pkg.version.range>
     </properties>
 </project>
