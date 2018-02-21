@@ -25,26 +25,31 @@ import javax.servlet.ServletException;
 public class RegisterServiceComponents {
 
     private static final Log log = LogFactory.getLog(RegisterServiceComponents.class);
-    private Msf4jBridgeServlet bridgeServlet;
-    private Set<Microservice> inactiveMicroservices = new HashSet<>();
+    private Msf4jBridgeServlet bridgeServlet = new Msf4jBridgeServlet();
+    private Set<Microservice> inactiveMicroServices = new HashSet<>();
     private HttpService httpService;
+
+    // Below instance Block is used to initialize Bridge Servlet.
+    {
+        try {
+            bridgeServlet.init();
+        } catch (ServletException e) {
+            log.error("Error occurred while initializing the bridge servlet.", e);
+            e.printStackTrace();
+        }
+    }
 
     @Activate
     protected void activate(ComponentContext componentContext) {
 
         System.out.println("Activation RegisterServiceComponents ");
-        bridgeServlet = new Msf4jBridgeServlet();
         HttpContext defaultHttpContext = httpService.createDefaultHttpContext();
 
         try {
-            bridgeServlet.init();
             httpService.registerServlet("/IS", bridgeServlet, null, defaultHttpContext);
             addPendingServices();
             log.info("MSF4J - Servlet bridge activated Successfully.");
-        } catch (ServletException e) {
-            log.error("Error in registering the MSF4J servlet", e);
-            e.printStackTrace();
-        } catch (NamespaceException e) {
+        } catch (ServletException | NamespaceException e) {
             log.error("Error in registering the MSF4J servlet", e);
             e.printStackTrace();
         }
@@ -53,7 +58,7 @@ public class RegisterServiceComponents {
     @Deactivate
     protected void deactivate(ComponentContext componentContext) {
 
-        System.out.println("Deactivate RegisterServiceComponents ");
+        log.info("Deactivating RegisterServiceComponents of MSF4J Bridge.");
     }
 
     /**
@@ -64,52 +69,48 @@ public class RegisterServiceComponents {
         if (bridgeServlet == null) {
             return;
         }
-        Set<Microservice> inactiveServicesCopy = new HashSet<>(inactiveMicroservices);
+        Set<Microservice> inactiveServicesCopy = new HashSet<>(inactiveMicroServices);
         //TODO: do some interlocking on THIS-123
-        inactiveServicesCopy.stream().forEach(ms -> bridgeServlet.addMicroserviceToRegistry(ms));
-        inactiveMicroservices.clear();
+        inactiveServicesCopy.stream().forEach(ms -> bridgeServlet.addMicroServiceToRegistry(ms));
+        inactiveMicroServices.clear();
     }
 
     @Reference(name = "microservice",
-               service = Microservice.class,
-               cardinality = ReferenceCardinality.MULTIPLE,
-               policy = ReferencePolicy.STATIC,
-               unbind = "removeService")
+            service = Microservice.class,
+            cardinality = ReferenceCardinality.MULTIPLE,
+            policy = ReferencePolicy.STATIC,
+            unbind = "removeService")
     protected void addService(Microservice service, Map properties) {
 
-        if (isAllRequiredCapabilitiesAvailable()) {
+        if (true) {
             Object channelId = properties.get(MSF4JConstants.CHANNEL_ID);
             Object contextPath = properties.get(MSF4JConstants.CONTEXT_PATH);
-            addMicroserviceToRegistry(service, channelId, contextPath);
+            addMicroServiceToRegistry(service, channelId, contextPath);
         } else {
             //TODO: do some interlocking on THIS-123
-            inactiveMicroservices.add(service);
-            log.info("Required services are not ready. Not deployng micro-service : " + service);
+            inactiveMicroServices.add(service);
+            log.info("Required services are not ready. Not deploying micro-service : " + service);
         }
     }
 
     protected void removeService(Microservice service, Map properties) {
-        //TODO: Implement
+
+        bridgeServlet.removeMicroServiceFromRegistry(service);
     }
 
-    private void addMicroserviceToRegistry(Microservice service, Object channelId, Object contextPath) {
+    private void addMicroServiceToRegistry(Microservice service, Object channelId, Object contextPath) {
 
-        bridgeServlet.addMicroserviceToRegistry(service);
-    }
-
-    private boolean isAllRequiredCapabilitiesAvailable() {
-
-        return bridgeServlet != null;
+        bridgeServlet.addMicroServiceToRegistry(service);
     }
 
     @Reference(name = "http.service",
-               service = HttpService.class,
-               cardinality = ReferenceCardinality.MANDATORY,
-               policy = ReferencePolicy.DYNAMIC,
-               unbind = "unsetHttpService")
+            service = HttpService.class,
+            cardinality = ReferenceCardinality.MANDATORY,
+            policy = ReferencePolicy.DYNAMIC,
+            unbind = "unsetHttpService")
     public void setHttpService(HttpService httpService) {
 
-        System.out.println("Setting HTTP SErvice : " + httpService);
+        System.out.println("Setting HTTP Service : " + httpService);
         this.httpService = httpService;
     }
 
@@ -120,7 +121,7 @@ public class RegisterServiceComponents {
     }
 
     /**
-     * Closes all MSF4j stuff
+     * Close all MSF4j bridging stuff
      */
     private void tearDownMsf4j() {
 
