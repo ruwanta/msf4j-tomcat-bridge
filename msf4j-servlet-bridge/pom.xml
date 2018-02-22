@@ -104,7 +104,8 @@
                         <Export-Package>
                             !com.wso2.carbon.identity.msf4j.bridge.servlet.internal,
                             com.wso2.carbon.identity.msf4j.bridge.servlet.*;version="1.0.1",
-                            org.wso2.msf4j
+                            org.wso2.msf4j,
+                            javax.ws.rs
                         </Export-Package>
                         <!--below line embeds all dependent jars until errors are resolved -->
                         <Embed-Dependency>*;scope=!provided|!compile;artifactId=!javax.servlet-api|tomcat-embed-core

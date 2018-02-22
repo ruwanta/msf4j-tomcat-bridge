@@ -97,9 +97,9 @@
                             org.osgi.framework;version="${osgi.framework.imp.pkg.version.range}",
                             org.osgi.service.component;version="${osgi.service.component.imp.pkg.version.range}",
                             <!--javax.ws.rs;version="${javax.version.range}",-->
-                            org.wso2.msf4j
+                            org.wso2.msf4j,
+                            javax.ws.rs
                         </Import-Package>
-                        <Embed-Dependency>javax.ws.rs-api</Embed-Dependency>
                         <Carbon-Component>${carbon.component}</Carbon-Component>
                     </instructions>
                 </configuration>
