@@ -1,9 +1,6 @@
 package com.wso2.carbon.identity.msf4j.bridge.hello.world;
 
-import org.osgi.framework.BundleContext;
-import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Deactivate;
 import org.wso2.msf4j.Microservice;
 
 import java.util.HashMap;
@@ -53,17 +50,7 @@ public class HelloService implements Microservice {
         nameToUserMap.put(user.getName(), user);
         return user.getName();
     }
-
-    @Activate
-    protected void activate(BundleContext bundleContext) {
-        // Nothing to do
-    }
-
-    @Deactivate
-    protected void deactivate(BundleContext bundleContext) {
-        // Nothing to do
-    }
-
+    
     @Override
     public String toString() {
         return "HelloWorld-OSGi-bundle";

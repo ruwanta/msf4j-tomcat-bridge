@@ -14,12 +14,14 @@ public class TomcatCarbonMessage extends HTTPCarbonMessage {
     private HttpServletRequest httpServletRequest;
 
     public TomcatCarbonMessage(HttpMessage httpMessage, HttpServletRequest httpServletRequest) {
+
         super(httpMessage);
         this.httpServletRequest = httpServletRequest;
     }
 
     @Override
     public HttpContent getHttpContent() {
+
         return new ServletWrappedHttpContent(httpServletRequest);
     }
 }

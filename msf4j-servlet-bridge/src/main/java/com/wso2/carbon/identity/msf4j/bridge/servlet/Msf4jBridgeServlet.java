@@ -4,7 +4,6 @@ import io.netty.handler.codec.http.DefaultHttpRequest;
 import io.netty.handler.codec.http.HttpMessage;
 import io.netty.handler.codec.http.HttpMethod;
 import io.netty.handler.codec.http.HttpVersion;
-import io.swagger.util.ReflectionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.wso2.carbon.messaging.Constants;
@@ -20,50 +19,33 @@ import java.io.IOException;
 import java.nio.channels.Channels;
 import java.nio.channels.WritableByteChannel;
 import java.util.Enumeration;
-import javax.servlet.AsyncContext;
+import java.util.concurrent.TimeUnit;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  * This is the Servlet used for bridging.
+ * Ideally we need to use Async Servlet. However we use locking of the tomcat thread as supporting
+ * async on servlet engine needs to be done all the places, including valves and filters.
+ *
  */
-@WebServlet(urlPatterns = {"/*"},asyncSupported = true)
 public class Msf4jBridgeServlet extends HttpServlet {
 
     private Log log = LogFactory.getLog(Msf4jBridgeServlet.class);
+    private static final String TOMCAT_MSF4J_CHANNEL = "Tomcat";
 
     private MicroservicesRegistryImpl msRegistry = new MicroservicesRegistryImpl();
     private MSF4JHttpConnectorListener msf4JHttpConnectorListener;
     private TomcatBridgeListener tomcatBridgeListener;
 
     private static final String HTTP_ASYNC_CONTEXT = "HttpAsyncContextProperty";
-    private static final String SERVICES_LIST = "ServiceClasses";
 
     @Override
     public void init(ServletConfig servletConfig) throws ServletException {
-        String serviceClasses = servletConfig.getInitParameter(SERVICES_LIST);
-        if (serviceClasses == null) {
-            //No services present. TODO: Log errors.
-            return;
-        }
-        String[] serviceClassesList = serviceClasses.split(",");
-        for (String serviceClass : serviceClassesList) {
-            try {
-                Class cls = Class.forName(serviceClass);
-                boolean hasPathAnnotation = (ReflectionUtils.getAnnotation(cls, javax.ws.rs.Path.class) != null);
-                if (hasPathAnnotation) {
-                    Object serviceObject = cls.newInstance();
-                    msRegistry.addService(serviceObject);
-                }
-            } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
-                log.error("An error occurred while trying to add service to registry.");
-            }
 
-        }
         this.init();
     }
 
@@ -71,7 +53,7 @@ public class Msf4jBridgeServlet extends HttpServlet {
 
         msRegistry.getSessionManager().init();
         msRegistry.initServices();
-        DataHolder.getInstance().getMicroservicesRegistries().put("tomcat", msRegistry);
+        DataHolder.getInstance().getMicroservicesRegistries().put(TOMCAT_MSF4J_CHANNEL, msRegistry);
 
         //TODO: Need to get this listener from the container. We should not create thread pools.
         msf4JHttpConnectorListener = new MSF4JHttpConnectorListener();
@@ -79,26 +61,28 @@ public class Msf4jBridgeServlet extends HttpServlet {
     }
 
     @Override
-    public ServletConfig getServletConfig() {
-
-        return null;
-    }
-
-    @Override
     protected void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        AsyncContext asyncContext = request.startAsync(request, response);
-        HTTPCarbonMessage httpCarbonMessage = translateMessage(request, response);
+        TomcatCarbonMessage httpCarbonMessage = translateMessage(request, response);
 
-        addToWaitingList(httpCarbonMessage, asyncContext);
+        Msf4jAsyncContext asyncContext = new Msf4jAsyncContext(response);
+        httpCarbonMessage.setProperty(HTTP_ASYNC_CONTEXT, asyncContext);
+        httpCarbonMessage.setProperty(MSF4JConstants.CHANNEL_ID, TOMCAT_MSF4J_CHANNEL);
+        msf4JHttpConnectorListener.onMessage(httpCarbonMessage);
+        try {
+            asyncContext.awaitForMsf4j(1000, TimeUnit.MILLISECONDS);
+        } catch (InterruptedException e) {
+            throw new ServletException("MSF4J service interrupted.", e);
+        }
     }
 
-    private HTTPCarbonMessage translateMessage(HttpServletRequest servletRequest, HttpServletResponse servletResponse) {
+    private TomcatCarbonMessage translateMessage(HttpServletRequest servletRequest,
+            HttpServletResponse servletResponse) {
 
         HttpMessage httpMessage = new DefaultHttpRequest(HttpVersion.HTTP_1_1,
                 new HttpMethod(servletRequest.getMethod()), servletRequest.getRequestURI());
-        HTTPCarbonMessage carbonMessage = new TomcatCarbonMessage(httpMessage, servletRequest);
+        TomcatCarbonMessage carbonMessage = new TomcatCarbonMessage(httpMessage, servletRequest);
         carbonMessage.setProperty(Constants.PROTOCOL, servletRequest.getProtocol());
         carbonMessage.setProperty(Constants.TO, servletRequest.getRequestURI()
                 .substring(servletRequest.getRequestURI().indexOf("/", 1), servletRequest.getRequestURI().length()));
@@ -127,13 +111,12 @@ public class Msf4jBridgeServlet extends HttpServlet {
     @Override
     public void destroy() {
 
-    }
-
-    void addToWaitingList(HTTPCarbonMessage httpCarbonMessage, AsyncContext asyncContext) {
-
-        httpCarbonMessage.setProperty(MSF4JConstants.CHANNEL_ID, "tomcat");
-        httpCarbonMessage.setProperty(HTTP_ASYNC_CONTEXT, asyncContext);
-        msf4JHttpConnectorListener.onMessage(httpCarbonMessage);
+        if (msf4JHttpConnectorListener != null) {
+            //TODO: Make API changes in MSF4J so that msf4JHttpConnectorListener can be shut down.
+        }
+        if (msRegistry != null) {
+            msRegistry.preDestroyServices();
+        }
     }
 
     /**
@@ -151,7 +134,7 @@ public class Msf4jBridgeServlet extends HttpServlet {
      *
      * @param service
      */
-    public void removeMicroServiceFromRegistry(Microservice service){
+    public void removeMicroServiceFromRegistry(Microservice service) {
 
         msRegistry.removeService(service);
     }
@@ -163,7 +146,7 @@ public class Msf4jBridgeServlet extends HttpServlet {
         @Override
         public void onMessage(HTTPCarbonMessage httpCarbonMessage) {
 
-            AsyncContext asyncContex = (AsyncContext) httpCarbonMessage.getProperty(HTTP_ASYNC_CONTEXT);
+            Msf4jAsyncContext asyncContex = (Msf4jAsyncContext) httpCarbonMessage.getProperty(HTTP_ASYNC_CONTEXT);
             if (asyncContex != null) {
                 try {
                     WritableByteChannel channel = Channels.newChannel(asyncContex.getResponse().getOutputStream());
@@ -185,6 +168,7 @@ public class Msf4jBridgeServlet extends HttpServlet {
         @Override
         public void onError(Throwable throwable) {
 
+            log.error("Error in Tomcat MSF4J connector listener", throwable);
         }
     }
 
